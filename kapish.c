@@ -77,13 +77,16 @@ cmd_type check_command(char *command)
 }
 
 #define LINE_BUFFER_SIZE 1024
-char **get_line(FILE *input)
+char **get_line(FILE *input, int echo)
 {
   char line_buffer[1024];
 
   // Read into buffer.
   if (fgets(line_buffer, LINE_BUFFER_SIZE, input) == NULL)
     return NULL;
+
+  if(echo != 0)
+    printf("%s", line_buffer);
 
   // Tokenize line
   char **tokens = tokenize(line_buffer);
@@ -208,7 +211,7 @@ int initalize()
 
   while (1)
   {
-    char **tokens = get_line(kapishrc);
+    char **tokens = get_line(kapishrc, 1);
     if (tokens == NULL)
       break;
 
@@ -246,7 +249,7 @@ int loop()
     printf("? ");
 
     // Get and process current command
-    char **tokens = get_line(stdin);
+    char **tokens = get_line(stdin, 0);
     if (tokens == NULL)
       continue;
 
