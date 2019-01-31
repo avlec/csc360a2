@@ -1,7 +1,11 @@
 # Kapish, a simple commandline wrapper.
 
+## Note
+This was done as a simple implimentation for an assignment in an
+Operating Systems course at the University of Victoria.
+
 ## Author
-Created and written by Alec Cox, V00846488
+Created and written by Alec Cox
 
 ## Assignment Assistance
 No help was obtained from others. With the exception of some answers
