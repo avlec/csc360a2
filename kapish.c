@@ -85,7 +85,7 @@ char **get_line(FILE *input, int echo)
   if (fgets(line_buffer, LINE_BUFFER_SIZE, input) == NULL)
     return NULL;
 
-  if(echo != 0)
+  if (echo != 0)
     printf("%s", line_buffer);
 
   // Tokenize line
@@ -119,12 +119,21 @@ int run_command(char **tokens)
   switch (cmd)
   {
   case SETENV:
-    if ((tokens[1] == NULL) || (tokens[2] == NULL))
+    if (tokens[1] == NULL)
     {
-      printf("Expected usage: setenv <variable> <value>\n");
+      printf("Expected usage: setenv <variable> <value, optional (clears variable)>\n");
       break;
     }
-    setenv(tokens[1], tokens[2], 1);
+    
+    if (tokens[2] == NULL)
+    {
+      setenv(tokens[1], "", 1);
+    }
+    else
+    {
+      setenv(tokens[1], tokens[2], 1);
+    }
+
     break;
   case UNSETENV:
     if (tokens[1] == NULL)
